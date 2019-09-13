@@ -2,9 +2,13 @@ from movie import Movie
 from user import User
 
 user = User('Mat')
+user.add_movie('Matrix', 'Sci-Fi')
+user.add_movie('The Interview', 'Comedy')
 
-my_movie = Movie("Matrix", "Sci-Fi", False)
+user.save_to_file()
 
-user.movies.append(my_movie)
+# my_movie = Movie("Matrix", "Sci-Fi", False)
 
-print(user, user.movies, user.watched_movies())
+# user.movies.append(my_movie)
+
+# print(user, user.movies, user.watched_movies())

@@ -9,8 +9,8 @@ class User:
     def __repr__(self):
         return f'User {self.name}'
 
-    def add_movie(self, name, genre):
-        movie = Movie(name, genre, False)
+    def add_movie(self, name, genre, watched):
+        movie = Movie(name, genre, watched)
         self.movies.append(movie)
 
     def delete_movie(self, name):
@@ -27,6 +27,16 @@ class User:
                 movie.json() for movie in self.movies
             ]
         }
+
+    @classmethod
+    def from_json(cls, json_data):
+        user = User(json_data['name'])
+        movies = []
+        for movie_data in json_data['movies']:
+            movies.append(Movie.from_json(movie_data))
+        user.movies = movies
+
+        return user
 
     # def save_to_file(self):
     #     with open(f'{self.name}.txt', 'w') as f:

@@ -1,9 +1,10 @@
 from movie import Movie
 from user import User
+import json
 
-# user = User('Mat')
-# user.add_movie('Matrix', 'Sci-Fi')
-# user.add_movie('The Interview', 'Comedy')
+user = User('Mat')
+user.add_movie('Matrix', 'Sci-Fi')
+user.add_movie('The Interview', 'Comedy')
 
 
 # user.save_to_file()
@@ -15,6 +16,11 @@ from user import User
 # print(user, user.movies, user.watched_movies())
 
 
-user = User.load_from_file('Mat.txt')
+# user = User.load_from_file('Mat.txt')
 
-print(user.name, user.movies)
+# print(user.name, user.movies)
+
+# print(user.json())
+
+with open('my_file.txt', 'w') as f:
+    json.dump(user.json(), f)

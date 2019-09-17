@@ -8,4 +8,9 @@ my_user = User(
 )
 
 
-my_user.save_to_db()
+# inserting data
+# my_user.save_to_db()
+
+# retrieving data
+my_user = User.load_from_db_by_email('test@test.com')
+print(my_user)

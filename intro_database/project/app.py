@@ -4,8 +4,8 @@ my_user = User(
     'test@test.com',
     'test1',
     'test2',
-    1
+    None
 )
 
 
-print(my_user)
+my_user.save_to_db()

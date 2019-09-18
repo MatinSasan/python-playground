@@ -1,7 +1,4 @@
-import psycopg2
-import os
-from dotenv import load_dotenv
-load_dotenv()
+from database import connect
 
 
 class User:
@@ -15,12 +12,7 @@ class User:
         return f"User {self.email}"
 
     def save_to_db(self):
-        with psycopg2.connect(
-            user=os.getenv('USER'),
-            password=os.getenv('PASS'),
-            database=os.getenv('DATABASE'),
-            host="localhost"
-        ) as connection:
+        with connect() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'INSERT INTO users (email, first_name, last_name)' +
@@ -29,12 +21,7 @@ class User:
 
     @classmethod
     def load_from_db_by_email(cls, email):
-        with psycopg2.connect(
-            user=os.getenv('USER'),
-            password=os.getenv('PASS'),
-            database=os.getenv('DATABASE'),
-            host='localhost'
-        ) as connection:
+        with connect() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'SELECT * FROM users WHERE email=%s', (email,))

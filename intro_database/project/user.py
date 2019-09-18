@@ -1,4 +1,4 @@
-from database import ConnectionPool
+from database import ConnectionFromPool
 
 
 class User:
@@ -12,7 +12,7 @@ class User:
         return f"User {self.email}"
 
     def save_to_db(self):
-        with ConnectionPool() as connection:
+        with ConnectionFromPool() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'INSERT INTO users (email, first_name, last_name)' +
@@ -23,7 +23,7 @@ class User:
 
     @classmethod
     def load_from_db_by_email(cls, email):
-        with ConnectionPool() as connection:
+        with ConnectionFromPool() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'SELECT * FROM users WHERE email=%s', (email,))

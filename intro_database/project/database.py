@@ -4,24 +4,27 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+connection_pool = pool.SimpleConnectionPool(
+    1,
+    3,
+    user=os.getenv('USER'),
+    password=os.getenv('PASS'),
+    database=os.getenv('DATABASE'),
+    host="localhost"
+)
 
-# NOT IDEAL
-class ConnectionPool:
+
+class ConnectionFromPool:
     def __init__(self):
-        self.connection_pool = pool.SimpleConnectionPool(
-            1,
-            3,
-            user=os.getenv('USER'),
-            password=os.getenv('PASS'),
-            database=os.getenv('DATABASE'),
-            host="localhost"
-        )
+        self.connection = None
 
     def __enter__(self):
-        return self.connection_pool.getconn()
+        self.connection = connection_pool.getconn()
+        return self.connection
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+        self.connection.commit()
+        connection_pool.putconn(self.connection)
 
 
 # def connect():

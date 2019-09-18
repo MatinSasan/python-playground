@@ -1,7 +1,16 @@
-from user import User
-from database import Database
 
-Database.initialize()
+from database import Database
+from user import User
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
+Database.initialize(
+    user=os.getenv('USER'),
+    password=os.getenv('PASS'),
+    database=os.getenv('DATABASE'),
+    host="localhost")
 
 my_user = User(
     'test1@test.com',

@@ -20,19 +20,19 @@ class Currency:
 
     def __eq__(self, other):
         # equal to
-        self.to_usd() == other.to_usd()
+        return self.to_usd() == other.to_usd()
 
     def __lt__(self, other):
         # less than, <
-        self.to_usd() < other.to_usd()
+        return self.to_usd() < other.to_usd()
 
     def __le__(self, other):
         # less than or equal to, <=
-        self.to_usd() <= other.to_usd()
+        return self.to_usd() <= other.to_usd()
 
     def __ge__(self, other):
         # greater than or equal to, >=
-        self.to_usd() >= other.to_usd()
+        return self.to_usd() >= other.to_usd()
 
 
 pounds = Currency('GBP', 1.21)
